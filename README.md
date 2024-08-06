@@ -39,13 +39,14 @@ The first step is to compile LLVM on your machine
 (this assumes an in-tree build, but out-of-tree will also work):
 
 ```sh
-     ~$ git clone https://github.com/llvm/llvm-project.git
-     ~$ cd llvm-project
-     llvm-project$ git checkout release/17.x
-     llvm-project$ mkdir llvm/build
-     llvm-project$ cd llvm/build
-     build$ cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Debug -DLLVM_PARALLEL_LINK_JOBS=1
-     build$ ninja
+At least in my case the right step that compiled successfully: (March 20 2024 issue comment elix22)
+git clone https://github.com/llvm/llvm-project.git
+~$ cd llvm-project
+llvm-project$ git checkout release/17.x
+llvm-project$ mkdir llvm/build
+llvm-project$ cd llvm/build
+build$ cmake .. -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang"
+build$ make
 ```
 To run tests, you need to build `lli`.
 
