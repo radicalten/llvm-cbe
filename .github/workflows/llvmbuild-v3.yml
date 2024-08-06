@@ -1,4 +1,4 @@
-name: Llvmbuild
+name: Llvmbuild-v3
 on:
   push:
     branches:
@@ -26,6 +26,6 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: noods-wii
+        name: llvm-v3
         path: |
           ./
