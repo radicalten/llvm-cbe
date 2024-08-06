@@ -23,6 +23,11 @@ jobs:
         cd ../build
         cmake -S .. -G "Ninja"
         ninja bin/llvm-cbe
+        cd test/selectionsort
+        clang-17 -S -emit-llvm -g main.c
+        ../../build/tools/llvm-cbe/llvm-cbe main.ll
+        gcc -o main.cbe main.cbe.c
+        ./main.cbe
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
