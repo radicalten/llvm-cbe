@@ -11,7 +11,7 @@ jobs:
       uses: actions/checkout@v4
     - name: Compile
       run: |
-        apt install llvm-dev clang ninja-build
+        sudo apt install llvm-dev clang ninja-build
         cd llvm-cbe && mkdir build && cd build
         cmake -S .. -G "Ninja"
         ninja bin/llvm-cbe
