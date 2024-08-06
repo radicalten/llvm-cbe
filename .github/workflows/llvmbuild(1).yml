@@ -1,0 +1,31 @@
+name: Llvmbuild
+on:
+  push:
+    branches:
+    - master
+jobs:
+  build-wii:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Compile
+      run: |
+        git clone https://github.com/llvm/llvm-project.git
+        cd llvm-project
+        git checkout release/17.x
+        mkdir llvm/build
+        cd llvm/build
+        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Debug -DLLVM_PARALLEL_LINK_JOBS=1
+        ninja
+        cd llvm-project/llvm/projects
+        git clone https://github.com/JuliaHubOSS/llvm-cbe
+        cd ../build
+        cmake -S .. -G "Ninja"
+        ninja bin/llvm-cbe
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: noods-wii
+        path: |
+          ./
