@@ -12,7 +12,7 @@ jobs:
     - name: Compile
       run: |
         sudo apt install llvm-dev clang ninja-build
-        cd llvm-cbe && mkdir build && cd build
+        cd . && mkdir build && cd build
         cmake -S .. -G "Ninja"
         ninja bin/llvm-cbe
         cd test/selectionsort
